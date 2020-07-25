@@ -42,17 +42,20 @@ def find_in_obj(obj, condition, tagpath=None):
 
 class QuoteSpider(scrapy.Spider):
     name = 'Papersciencedirect'
-    with open('volume.json', 'r') as db_file:
-        data = json.load(db_file)
-    # start_urls = [parameter['article_link'] for parameter in data]
-    start_urls = []
-    for parameter in data:
-        # print('******************')
-        start_urls.append(parameter['article_link'])
-        # print(type(start_urls))
-    # start_urls = [
-    #     'https://www.sciencedirect.com/science/article/abs/pii/S1270963815001583'
-    # ]
+    try:
+        with open('volume.json', 'r') as db_file:
+            data = json.load(db_file)
+        # start_urls = [parameter['article_link'] for parameter in data]
+        start_urls = []
+        for parameter in data:
+            # print('******************')
+            start_urls.append(parameter['article_link'])
+            # print(type(start_urls))
+        # start_urls = [
+        #     'https://www.sciencedirect.com/science/article/abs/pii/S1270963815001583'
+        # ]
+    except:
+        pass
 
     def parse(self, response):
         items = ScienceItem()
